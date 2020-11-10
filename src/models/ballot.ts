@@ -1,6 +1,11 @@
 import { Schema, Document, model } from "mongoose"
 
-interface IBallot extends Document {
+interface IBallotSchemaDocument extends Document {
+  title: string
+  options: string[]
+}
+
+export interface IBallot {
   title: string
   options: string[]
 }
@@ -10,6 +15,15 @@ const BallotSchema = new Schema({
     type: String,
     required: true,
   },
+  type: {
+    type: String,
+    enum: ["ranked", "plurality"],
+    default: "plurality",
+  },
+  isComplete: {
+    type: Boolean,
+    default: false,
+  },
   options: [
     {
       type: String,
@@ -17,4 +31,4 @@ const BallotSchema = new Schema({
   ],
 })
 
-export default model<IBallot>("Ballot", BallotSchema)
+export default model<IBallotSchemaDocument>("Ballot", BallotSchema)

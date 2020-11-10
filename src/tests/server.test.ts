@@ -1,7 +1,7 @@
 import request from "supertest"
-import app from "./server"
+import app from "../server"
 
-describe("GET /user", () => {
+describe("GET /", () => {
   it("responds with json", (done) => {
     request(app)
       .get("/")

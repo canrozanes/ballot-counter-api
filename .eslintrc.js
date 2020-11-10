@@ -25,9 +25,12 @@ module.exports = {
         ts: "never",
       },
     ],
+    "no-plusplus": "off",
     "import/no-extraneous-dependencies": [
       "error",
-      { devDependencies: ["**/*.test.ts", "**/*.test.tsx"] },
+      {
+        devDependencies: ["**/*.test.ts", "**/*.test.tsx"],
+      },
     ],
   },
 }
