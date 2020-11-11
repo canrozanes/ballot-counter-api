@@ -6,8 +6,10 @@ interface IPluralityVote extends Document {
 }
 
 const PluralityVoteSchema = new Schema({
-  type: {
-    type: String,
+  ballot: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: "Ballot",
   },
   choice: String,
 })

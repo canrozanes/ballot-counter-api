@@ -2,7 +2,6 @@ import { config as configDotEnv } from "dotenv"
 import express from "express"
 import cors from "cors"
 import MongoDBConnect from "./config/db"
-import * as testDB from "./config/test-db"
 import ballotRouter from "./routes/ballot"
 
 // Load all the env variables
@@ -12,7 +11,7 @@ if (envLoadResults.error) {
 }
 
 // Connect Database
-if (process.env.NODE_ENV === "production") {
+if (process.env.APP_ENV === "production") {
   MongoDBConnect()
 }
 
@@ -32,5 +31,6 @@ app.use("/ballot", ballotRouter)
 if (process.env.NODE_ENV !== "test") {
   app.listen(PORT, () => console.log(`Server started on port :${PORT}`))
 }
+console.log(`APP_ENV: ${process.env.APP_ENV}`)
 
 export default app

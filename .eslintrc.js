@@ -32,5 +32,6 @@ module.exports = {
         devDependencies: ["**/*.test.ts", "**/*.test.tsx"],
       },
     ],
+    "no-underscore-dangle": "off",
   },
 }
