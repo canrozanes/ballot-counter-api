@@ -12,6 +12,7 @@ export const connect = async (): Promise<void> => {
   const mongooseOpts = {
     useUnifiedTopology: true,
     useNewUrlParser: true,
+    useFindAndModify: false,
   }
 
   await mongoose.connect(uri, mongooseOpts)

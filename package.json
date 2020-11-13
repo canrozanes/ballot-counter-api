@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "test:cov": "jest --collect-coverage"
+    "test:cov": "jest --collect-coverage",
+    "test:watch": "jest --watch"
   },
   "keywords": [],
   "author": "",

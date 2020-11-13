@@ -11,7 +11,7 @@ if (envLoadResults.error) {
 }
 
 // Connect Database
-if (process.env.APP_ENV === "production") {
+if (process.env.NODE_ENV === "production") {
   MongoDBConnect()
 }
 
@@ -27,10 +27,11 @@ app.get("/", (_, res) => res.send("API Running"))
 
 app.use("/ballot", ballotRouter)
 
-// eslint-disable-next-line no-console
 if (process.env.NODE_ENV !== "test") {
+  // eslint-disable-next-line no-console
   app.listen(PORT, () => console.log(`Server started on port :${PORT}`))
+  // eslint-disable-next-line no-console
+  console.log(`NODE_ENV: ${process.env.NODE_ENV}`)
 }
-console.log(`APP_ENV: ${process.env.APP_ENV}`)
 
 export default app

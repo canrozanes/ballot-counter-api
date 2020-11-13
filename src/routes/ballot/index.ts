@@ -21,25 +21,26 @@ ballotRouter.post("/", async (req: Request, res: Response) => {
     return
   } catch (e) {
     console.log(e.message)
+    res.status(500).json({ message: "something went wrong" })
   }
 })
 
 ballotRouter.post("/:id/cast-vote", async (req: Request, res: Response) => {
   const { id } = req.params
-  const ballot = await Ballot.findById(id)
+  try {
+    const ballot = await Ballot.findById(id)
 
-  if (!ballot) {
-    res.status(400).json({ message: "bad request: invalid vote" })
-    return
-  }
+    if (!ballot) {
+      res.status(400).json({ message: "bad request: invalid vote" })
+      return
+    }
 
-  if (ballot.type === "plurality") {
-    const { choice } = req.body
-    const newVote = new PluralityVote({
-      choice,
-      ballot,
-    })
-    try {
+    if (ballot.type === "plurality") {
+      const { choice } = req.body
+      const newVote = new PluralityVote({
+        choice,
+        ballot,
+      })
       const voteResponse = await newVote.save()
       res.status(201).json({
         ballot: {
@@ -48,9 +49,10 @@ ballotRouter.post("/:id/cast-vote", async (req: Request, res: Response) => {
         message: "vote successfully cast",
       })
       return
-    } catch (e) {
-      console.log(e.message)
     }
+  } catch (e) {
+    console.log(e.message)
+    res.status(500).json({ message: "something went wrong" })
   }
 })
 
@@ -88,6 +90,7 @@ ballotRouter.patch(
       }
     } catch (e) {
       console.log(e.message)
+      res.status(500).json({ message: "something went wrong" })
     }
   }
 )
