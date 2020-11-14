@@ -1,7 +1,8 @@
 import { Request, Response } from "express"
+import { v4 as uuid } from "uuid"
 import Ballot from "../../models/ballot"
 
-export const postBallot = async (
+export const createBallot = async (
   req: Request,
   res: Response
 ): Promise<void> => {
@@ -13,6 +14,7 @@ export const postBallot = async (
   const newBallot = new Ballot({
     title,
     options,
+    adminToken: uuid(),
   })
   try {
     const dbResponse = await newBallot.save()
@@ -24,4 +26,4 @@ export const postBallot = async (
   }
 }
 
-export default postBallot
+export default createBallot

@@ -8,9 +8,15 @@ export const setVotingComplete = async (
   res: Response
 ): Promise<void> => {
   const { id } = req.params
+  const { adminToken } = req.query
+
   try {
     const ballot = await Ballot.findById(id)
     if (!ballot) {
+      res.status(404).json({ message: "no such ballot exists" })
+      return
+    }
+    if (adminToken !== ballot.adminToken) {
       res.status(404).json({ message: "no such ballot exists" })
       return
     }

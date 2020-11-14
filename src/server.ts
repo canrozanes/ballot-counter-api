@@ -29,9 +29,11 @@ app.use("/ballot", ballotRouter)
 
 if (process.env.NODE_ENV !== "test") {
   // eslint-disable-next-line no-console
-  app.listen(PORT, () => console.log(`Server started on port :${PORT}`))
+  app.listen(PORT, () => {
+    console.log(`Server started on port :${PORT}`)
+    console.log(`NODE_ENV: ${process.env.NODE_ENV}`)
+  })
   // eslint-disable-next-line no-console
-  console.log(`NODE_ENV: ${process.env.NODE_ENV}`)
 }
 
 export default app

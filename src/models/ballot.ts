@@ -5,6 +5,7 @@ interface IBallotSchemaDocument extends Document {
   options: string[]
   isComplete?: boolean
   type: "ranked" | "plurality"
+  adminToken: string
 }
 
 export interface IBallot {
@@ -12,6 +13,7 @@ export interface IBallot {
   options: string[]
   isComplete?: boolean
   type: "ranked" | "plurality"
+  adminToken: string
 }
 
 const BallotSchema = new Schema({
@@ -34,6 +36,9 @@ const BallotSchema = new Schema({
     default: false,
   },
   result: {
+    type: String,
+  },
+  adminToken: {
     type: String,
   },
 })

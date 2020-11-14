@@ -9,6 +9,7 @@ export const getBallot = async (req: Request, res: Response): Promise<void> => {
       res.status(404).json({ message: "ballot not found" })
       return
     }
+    delete ballot.adminToken
     res.status(200).json({
       ballot,
       message: "success",
